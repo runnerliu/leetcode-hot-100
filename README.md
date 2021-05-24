@@ -50,6 +50,48 @@ LeetCode地址: https://leetcode-cn.com/problems/linked-list-cycle/
 
 LeetCode地址: https://leetcode-cn.com/problems/min-stack/
 
+#### 160. 相交链表
+
+LeetCode地址: https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
+
+#### 169. 多数元素
+
+LeetCode地址: https://leetcode-cn.com/problems/majority-element/
+
+#### 206. 反转链表
+
+LeetCode地址: https://leetcode-cn.com/problems/reverse-linked-list/
+
+#### 226. 翻转二叉树
+
+LeetCode地址: https://leetcode-cn.com/problems/invert-binary-tree/
+
+#### 234. 回文链表
+
+LeetCode地址: https://leetcode-cn.com/problems/palindrome-linked-list/
+
+#### 283. 移动零
+
+LeetCode地址: https://leetcode-cn.com/problems/move-zeroes/
+
+#### 448. 找到所有数组中消失的数字
+
+LeetCode地址: https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/
+
+#### 461. 汉明距离
+
+LeetCode地址: https://leetcode-cn.com/problems/hamming-distance/
+
+#### 543. 二叉树的直径
+
+LeetCode地址: https://leetcode-cn.com/problems/diameter-of-binary-tree/
+
+#### 617. 合并二叉树
+
+LeetCode地址: https://leetcode-cn.com/problems/merge-two-binary-trees/
+
+
+
 ### 中等
 
 #### 2. 两数相加
@@ -63,6 +105,8 @@ LeetCode地址: https://leetcode-cn.com/problems/longest-substring-without-repea
 #### 5. 最长回文子串
 
 LeetCode地址: https://leetcode-cn.com/problems/longest-palindromic-substring/
+
+
 
 ### 困难
 
