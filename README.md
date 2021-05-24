@@ -90,8 +90,6 @@ LeetCode地址: https://leetcode-cn.com/problems/diameter-of-binary-tree/
 
 LeetCode地址: https://leetcode-cn.com/problems/merge-two-binary-trees/
 
-
-
 ### 中等
 
 #### 2. 两数相加
@@ -106,7 +104,89 @@ LeetCode地址: https://leetcode-cn.com/problems/longest-substring-without-repea
 
 LeetCode地址: https://leetcode-cn.com/problems/longest-palindromic-substring/
 
+LeetCode地址: 
 
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
+
+LeetCode地址: 
 
 ### 困难
 
@@ -114,3 +194,58 @@ LeetCode地址: https://leetcode-cn.com/problems/longest-palindromic-substring/
 
 LeetCode地址: https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
 
+#### 10. 正则表达式匹配
+
+LeetCode地址: https://leetcode-cn.com/problems/regular-expression-matching/
+
+#### 23. 合并K个升序链表
+
+LeetCode地址: https://leetcode-cn.com/problems/merge-k-sorted-lists/
+
+#### 32. 最长有效括号
+
+LeetCode地址: https://leetcode-cn.com/problems/longest-valid-parentheses/
+
+#### 42. 接雨水
+
+LeetCode地址: https://leetcode-cn.com/problems/trapping-rain-water/
+
+#### 72. 编辑距离
+
+LeetCode地址: https://leetcode-cn.com/problems/edit-distance/
+
+#### 76. 最小覆盖子串
+
+LeetCode地址: https://leetcode-cn.com/problems/minimum-window-substring/
+
+#### 84. 柱状图中最大的矩形
+
+LeetCode地址: https://leetcode-cn.com/problems/largest-rectangle-in-histogram/
+
+#### 85. 最大矩形
+
+LeetCode地址: https://leetcode-cn.com/problems/maximal-rectangle/
+
+#### 124. 二叉树中的最大路径和
+
+LeetCode地址: https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/
+
+#### 128. 最长连续序列
+
+LeetCode地址: https://leetcode-cn.com/problems/longest-consecutive-sequence/
+
+#### 239. 滑动窗口最大值
+
+LeetCode地址: https://leetcode-cn.com/problems/sliding-window-maximum/
+
+#### 297. 二叉树的序列化与反序列化
+
+LeetCode地址: https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
+
+#### 301. 删除无效的括号
+
+LeetCode地址: https://leetcode-cn.com/problems/remove-invalid-parentheses/
+
+#### 312. 戳气球
+
+LeetCode地址: https://leetcode-cn.com/problems/burst-balloons/
