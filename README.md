@@ -10,6 +10,20 @@ LeetCode地址: https://leetcode-cn.com/problems/two-sum/
 
 LeetCode地址: https://leetcode-cn.com/problems/valid-parentheses/
 
+```
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        while '{}' in s or '()' in s or '[]' in s:
+            s = s.replace('{}', '')
+            s = s.replace('[]', '')
+            s = s.replace('()', '')
+        return s == ''
+```
+
 #### 21. 合并两个有序链表
 
 LeetCode地址: https://leetcode-cn.com/problems/merge-two-sorted-lists/
