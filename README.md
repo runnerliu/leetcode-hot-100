@@ -6,6 +6,21 @@
 
 LeetCode地址: https://leetcode-cn.com/problems/two-sum/
 
+```
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        if not nums:
+            return []
+        usedNums = {}
+        for index, num in enumerate(nums):
+            v = target - num
+            if v in usedNums:
+                return [usedNums[v], index]
+            else:
+                usedNums[num] = index
+        return []
+```
+
 #### 20. 有效的括号
 
 LeetCode地址: https://leetcode-cn.com/problems/valid-parentheses/
@@ -27,6 +42,24 @@ class Solution(object):
 #### 21. 合并两个有序链表
 
 LeetCode地址: https://leetcode-cn.com/problems/merge-two-sorted-lists/
+
+```
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        if not l1: return l2
+        if not l2: return l1
+        if l1.val < l2.val:
+            l1.next = self.mergeTwoLists(l1.next, l2)
+            return l1
+        else:
+            l2.next = self.mergeTwoLists(l2.next, l1)
+            return l2
+```
 
 #### 53. 最大子序和
 
@@ -59,6 +92,26 @@ LeetCode地址: https://leetcode-cn.com/problems/single-number/
 #### 141. 环形链表
 
 LeetCode地址: https://leetcode-cn.com/problems/linked-list-cycle/
+
+```
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        if not head or not head.next:
+            return False
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
+        return False
+```
 
 #### 155. 最小栈
 
@@ -219,6 +272,20 @@ LeetCode地址: https://leetcode-cn.com/problems/merge-k-sorted-lists/
 #### 32. 最长有效括号
 
 LeetCode地址: https://leetcode-cn.com/problems/longest-valid-parentheses/
+
+```
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        if not s: return 0
+        stack, l = [], 0
+        for i in range(len(s)):
+            if not stack or s[i] == '(' or s[stack[-1]] == ')':
+                stack.append(i)
+            else:
+                stack.pop()
+                l = max(l, i - (stack[-1] if stack else -1))
+        return l
+```
 
 #### 42. 接雨水
 
