@@ -141,6 +141,46 @@ LeetCode地址: https://leetcode-cn.com/problems/palindrome-linked-list/
 
 LeetCode地址: https://leetcode-cn.com/problems/move-zeroes/
 
+```
+class Solution(object):
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None Do not return anything, modify nums in-place instead.
+        """
+        if not nums:
+            return []
+        if 0 not in nums:
+            return nums
+        for i in range(len(nums)):
+            if nums[i] == 0:
+                for j in range(i, len(nums)):
+                    if nums[j] != 0:
+                        nums[i], nums[j] = nums[j], nums[i]
+                        break
+        return nums
+
+class Solution(object):
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None Do not return anything, modify nums in-place instead.
+        """
+        if not nums:
+            return []
+        if 0 not in nums:
+            return nums
+        count = i = 0
+        while i < len(nums):
+            if nums[i] == 0:
+                del nums[i]
+                count += 1
+            else:
+                i += 1
+        nums.extend([0]*count)
+        return nums
+```
+
 #### 448. 找到所有数组中消失的数字
 
 LeetCode地址: https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/
@@ -162,6 +202,33 @@ LeetCode地址: https://leetcode-cn.com/problems/merge-two-binary-trees/
 #### 2. 两数相加
 
 LeetCode地址: https://leetcode-cn.com/problems/add-two-numbers/
+
+```
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        head = ListNode(l1.val + l2.val)
+        cur = head
+        while l1.next or l2.next:
+            l1 = l1.next if l1.next else ListNode()
+            l2 = l2.next if l2.next else ListNode()
+            cur.next = ListNode(l1.val + l2.val + cur.val // 10)
+            cur.val = cur.val % 10
+            cur = cur.next
+        if cur.val >= 10:
+            cur.next = ListNode(cur.val // 10)
+            cur.val = cur.val % 10
+        return head
+```
 
 #### 3. 无重复字符的最长子串
 
