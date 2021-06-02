@@ -129,6 +129,25 @@ LeetCode地址: https://leetcode-cn.com/problems/majority-element/
 
 LeetCode地址: https://leetcode-cn.com/problems/reverse-linked-list/
 
+```
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head or not head.next:
+            return head
+        cur = head
+        prev = None
+        while cur:
+            tmp = cur.next
+            cur.next = prev
+            prev = cur
+            cur = tmp
+        return prev
+```
+
 #### 226. 翻转二叉树
 
 LeetCode地址: https://leetcode-cn.com/problems/invert-binary-tree/
