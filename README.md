@@ -257,89 +257,278 @@ LeetCode地址: https://leetcode-cn.com/problems/longest-substring-without-repea
 
 LeetCode地址: https://leetcode-cn.com/problems/longest-palindromic-substring/
 
-LeetCode地址: 
+#### 11. 盛最多水的容器
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/container-with-most-water/
 
-LeetCode地址: 
+#### 15. 三数之和
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/3sum/
 
-LeetCode地址: 
+#### 17. 电话号码的字母组合
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
 
-LeetCode地址: 
+#### 19. 删除链表的倒数第 N 个结点
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
 
-LeetCode地址: 
+#### 22. 括号生成
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/generate-parentheses/
 
-LeetCode地址: 
+#### 31. 下一个排列
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/next-permutation/
 
-LeetCode地址: 
+#### 33. 搜索旋转排序数组
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/search-in-rotated-sorted-array/
 
-LeetCode地址: 
+#### 34. 在排序数组中查找元素的第一个和最后一个位置
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 
-LeetCode地址: 
+#### 39. 组合总和
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/combination-sum/
 
-LeetCode地址: 
+#### 46. 全排列
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/permutations/
 
-LeetCode地址: 
+#### 48. 旋转图像
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/rotate-image/
 
-LeetCode地址: 
+#### 49. 字母异位词分组
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/group-anagrams/
 
-LeetCode地址: 
+#### 55. 跳跃游戏
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/jump-game/
 
-LeetCode地址: 
+#### 56. 合并区间
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/merge-intervals/
 
-LeetCode地址: 
+#### 62. 不同路径
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/unique-paths/
 
-LeetCode地址: 
+#### 64. 最小路径和
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/minimum-path-sum/
 
-LeetCode地址: 
+#### 75. 颜色分类
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/sort-colors/
 
-LeetCode地址: 
+#### 78. 子集
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/subsets/
 
-LeetCode地址: 
+#### 79. 单词搜索
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/word-search/
 
-LeetCode地址: 
+#### 96. 不同的二叉搜索树
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/unique-binary-search-trees/
 
-LeetCode地址: 
+#### 98. 验证二叉搜索树
 
-LeetCode地址: 
+LeetCode地址: https://leetcode-cn.com/problems/validate-binary-search-tree/
+
+#### 102. 二叉树的层序遍历
+
+LeetCode地址: https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
+
+#### 105. 从前序与中序遍历序列构造二叉树
+
+LeetCode地址: https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+
+#### 114. 二叉树展开为链表
+
+LeetCode地址: https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/
+
+#### 128. 最长连续序列
+
+LeetCode地址: https://leetcode-cn.com/problems/longest-consecutive-sequence/
+
+#### 139. 单词拆分
+
+LeetCode地址: https://leetcode-cn.com/problems/word-break/
+
+#### 142. 环形链表 II
+
+LeetCode地址: https://leetcode-cn.com/problems/linked-list-cycle-ii/
+
+#### 146. LRU 缓存机制
+
+LeetCode地址: https://leetcode-cn.com/problems/lru-cache/
+
+#### 148. 排序链表
+
+LeetCode地址: https://leetcode-cn.com/problems/sort-list/
+
+#### 152. 乘积最大子数组
+
+LeetCode地址: https://leetcode-cn.com/problems/maximum-product-subarray/
+
+#### 198. 打家劫舍
+
+LeetCode地址: https://leetcode-cn.com/problems/house-robber/
+
+#### 200. 岛屿数量
+
+LeetCode地址: https://leetcode-cn.com/problems/number-of-islands/
+
+#### 207. 课程表
+
+LeetCode地址: https://leetcode-cn.com/problems/course-schedule/
+
+#### 208. 实现 Trie (前缀树)
+
+LeetCode地址: https://leetcode-cn.com/problems/implement-trie-prefix-tree/
+
+#### 215. 数组中的第K个最大元素
+
+LeetCode地址: https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
+
+#### 221. 最大正方形
+
+LeetCode地址: https://leetcode-cn.com/problems/maximal-square/
+
+#### 236. 二叉树的最近公共祖先
+
+LeetCode地址: https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
+
+#### 238. 除自身以外数组的乘积
+
+LeetCode地址: https://leetcode-cn.com/problems/product-of-array-except-self/
+
+#### 240. 搜索二维矩阵 II
+
+LeetCode地址: https://leetcode-cn.com/problems/search-a-2d-matrix-ii/
+
+#### 279. 完全平方数
+
+LeetCode地址: https://leetcode-cn.com/problems/perfect-squares/
+
+#### 287. 寻找重复数
+
+LeetCode地址: https://leetcode-cn.com/problems/find-the-duplicate-number/
+
+#### 300. 最长递增子序列
+
+LeetCode地址: https://leetcode-cn.com/problems/longest-increasing-subsequence/
+
+#### 309. 最佳买卖股票时机含冷冻期
+
+LeetCode地址: https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
+
+#### 322. 零钱兑换
+
+LeetCode地址: https://leetcode-cn.com/problems/coin-change/
+
+#### 337. 打家劫舍 III
+
+LeetCode地址: https://leetcode-cn.com/problems/house-robber-iii/
+
+#### 347. 前 K 个高频元素
+
+LeetCode地址: https://leetcode-cn.com/problems/top-k-frequent-elements/
+
+#### 394. 字符串解码
+
+LeetCode地址: https://leetcode-cn.com/problems/decode-string/
+
+#### 399. 除法求值
+
+LeetCode地址: https://leetcode-cn.com/problems/evaluate-division/
+
+#### 406. 根据身高重建队列
+
+LeetCode地址: https://leetcode-cn.com/problems/queue-reconstruction-by-height/
+
+#### 416. 分割等和子集
+
+LeetCode地址: https://leetcode-cn.com/problems/partition-equal-subset-sum/
+
+#### 437. 路径总和 III
+
+LeetCode地址: https://leetcode-cn.com/problems/path-sum-iii/
+
+#### 438. 找到字符串中所有字母异位词
+
+LeetCode地址: https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/
+
+#### 494. 目标和
+
+LeetCode地址: https://leetcode-cn.com/problems/target-sum/
+
+#### 538. 把二叉搜索树转换为累加树
+
+LeetCode地址: https://leetcode-cn.com/problems/convert-bst-to-greater-tree/
+
+#### 560. 和为K的子数组
+
+LeetCode地址: https://leetcode-cn.com/problems/subarray-sum-equals-k/
+
+#### 581. 最短无序连续子数组
+
+LeetCode地址: https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/
+
+#### 621. 任务调度器
+
+LeetCode地址: https://leetcode-cn.com/problems/task-scheduler/
+
+#### 647. 回文子串
+
+LeetCode地址: https://leetcode-cn.com/problems/palindromic-substrings/
+
+#### 739. 每日温度
+
+LeetCode地址: https://leetcode-cn.com/problems/daily-temperatures/
+
+#### 1254. 统计封闭岛屿的数目
+
+LeetCode地址: https://leetcode-cn.com/problems/number-of-closed-islands/
+
+```
+class Solution:
+    def closedIsland(self, grid: List[List[int]]) -> int:
+        if len(grid) == 0:
+            return 0
+        rows, cols = len(grid), len(grid[0])
+
+        def dfs(x, y):
+            if grid[x][y] == 1:
+                return
+            grid[x][y] = 1
+            for xx, yy in [(x-1, y), (x, y+1), (x+1, y), (x, y-1)]:
+                if 0 <= xx < rows and 0 <= yy < cols:
+                    dfs(xx, yy)
+
+        for i in range(rows):
+            dfs(i, 0)
+            dfs(i, cols - 1)
+        
+        for j in range(cols):
+            dfs(0, j)
+            dfs(rows - 1, j)
+
+        count = 0
+        for i in range(rows):
+            for j in range(cols):
+                if grid[i][j] == 0:
+                    dfs(i, j)
+                    count += 1
+        
+        return count
+```
 
 ### 困难
 
