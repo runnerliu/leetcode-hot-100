@@ -65,6 +65,54 @@ class Solution:
 
 LeetCode地址: https://leetcode-cn.com/problems/maximum-subarray/
 
+```
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        if len(nums) == 2:
+            return max([nums[0], nums[1], sum(nums)])
+        max_sum = nums[0]
+        for i in range(len(nums)):
+            tmp_max_sum = nums[i]
+            if tmp_max_sum > max_sum:
+                max_sum = tmp_max_sum
+            for j in range(i + 1, len(nums)):
+                tmp_max_sum += nums[j]
+                if tmp_max_sum > max_sum:
+                    max_sum = tmp_max_sum
+        return max_sum
+
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        if len(nums) == 2:
+            return max([nums[0], nums[1], sum(nums)])
+        max_sum = nums[0]
+        tmp = max_sum
+        for i in range(1, len(nums)):
+            if tmp + nums[i] > nums[i]:
+                max_sum = max(max_sum, tmp + nums[i])
+                tmp += nums[i]
+            else:
+                max_sum = max(max_sum, tmp, nums[i])
+                tmp = nums[i]
+        return max_sum
+```
+
 #### 70. 爬楼梯
 
 LeetCode地址: https://leetcode-cn.com/problems/climbing-stairs/
