@@ -121,6 +121,35 @@ LeetCode地址: https://leetcode-cn.com/problems/climbing-stairs/
 
 LeetCode地址: https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
 
+```
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if not root:
+            return []
+        res = []
+
+        def dfs(res, head):
+            if head:
+                dfs(res, head.left)
+                res.append(head.val)
+                dfs(res, head.right)
+            return res
+
+        dfs(res, root)
+        return res
+
+```
+
 #### 101. 对称二叉树
 
 LeetCode地址: https://leetcode-cn.com/problems/symmetric-tree/
@@ -128,6 +157,27 @@ LeetCode地址: https://leetcode-cn.com/problems/symmetric-tree/
 #### 104. 二叉树的最大深度
 
 LeetCode地址: https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
+
+```
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return 0
+        else:
+            left_height = self.maxDepth(root.left)
+            right_height = self.maxDepth(root.right)
+            return max(left_height, right_height) + 1
+```
 
 #### 121. 买卖股票的最佳时机
 
