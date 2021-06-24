@@ -117,6 +117,19 @@ class Solution(object):
 
 LeetCode地址: https://leetcode-cn.com/problems/climbing-stairs/
 
+```
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n < 0:
+            return 0
+        if n in [0, 1]:
+            return 1
+        a = b = 1
+        for _ in range(2, n + 1):
+            a, b = b, a + b
+        return b
+```
+
 #### 94. 二叉树的中序遍历
 
 LeetCode地址: https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
@@ -147,12 +160,35 @@ class Solution(object):
 
         dfs(res, root)
         return res
-
 ```
 
 #### 101. 对称二叉树
 
 LeetCode地址: https://leetcode-cn.com/problems/symmetric-tree/
+
+```
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        
+        def dfs(left, right):
+            if left == None and right == None:
+                return True
+            elif left == None or right == None:
+                return False
+            else:
+                return left.val == right.val and dfs(left.left, right.right) and dfs(left.right, right.left)
+
+
+        return dfs(root.left, root.right)
+```
 
 #### 104. 二叉树的最大深度
 
@@ -186,6 +222,27 @@ LeetCode地址: https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock
 #### 136. 只出现一次的数字
 
 LeetCode地址: https://leetcode-cn.com/problems/single-number/
+
+```
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        tmp = {}
+        for i in nums:
+            if i not in tmp:
+                tmp[i] = 1
+            else:
+                del tmp[i]
+        return list(tmp.keys())[0]
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        if len(nums) == 1: return nums[0]
+
+        res = nums[0]
+        for i in range(1, len(nums)):
+            res ^= nums[i]
+        return res
+```
 
 #### 141. 环形链表
 
@@ -222,6 +279,18 @@ LeetCode地址: https://leetcode-cn.com/problems/intersection-of-two-linked-list
 #### 169. 多数元素
 
 LeetCode地址: https://leetcode-cn.com/problems/majority-element/
+
+```
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        memo = {}
+        for i in nums:
+            if i not in memo:
+                memo[i] = 1
+            else:
+                memo[i] += 1
+        return max(memo, key=memo.get)
+```
 
 #### 206. 反转链表
 
