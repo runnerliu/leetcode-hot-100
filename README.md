@@ -512,6 +512,34 @@ LeetCode地址: https://leetcode-cn.com/problems/validate-binary-search-tree/
 
 LeetCode地址: https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
 
+```
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        
+        def dfs(res, head, cur):
+            if head:
+                cur += 1
+                if cur not in res:
+                    res[cur] = []
+                dfs(res, head.left, cur)
+                res[cur].append(head.val)
+                dfs(res, head.right, cur)
+                
+            return res
+        
+        res = {}
+        dfs(res, root, 0)
+        return list(res.values())
+```
+
 #### 105. 从前序与中序遍历序列构造二叉树
 
 LeetCode地址: https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
