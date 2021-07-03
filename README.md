@@ -292,6 +292,22 @@ class Solution:
         return max(memo, key=memo.get)
 ```
 
+#### 172. 阶乘后的零
+
+LeetCode地址: https://leetcode-cn.com/problems/factorial-trailing-zeroes/
+
+```
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        count = 0
+        for i in range(1, n + 1):
+            if not i % 5:
+                while not i % 5:
+                    i //= 5
+                    count += 1
+        return count
+```
+
 #### 206. 反转链表
 
 LeetCode地址: https://leetcode-cn.com/problems/reverse-linked-list/
