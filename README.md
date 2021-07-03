@@ -712,6 +712,8 @@ class Solution:
         num = (rand7() - 1) * 7 + rand7()
         if num > 40: return self.rand10()
         return num % 10 + 1
+
+利用(randX() - 1) * X + randX() 可以等概率的生成[1, X * X]范围的随机数
 ```
 
 #### 494. 目标和
