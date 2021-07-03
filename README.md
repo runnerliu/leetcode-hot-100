@@ -657,6 +657,7 @@ def partition(nums, left, right):
     nums[i] = key
     return i
 
+
 def quick_sort(nums, left, right):
     if left < right:
         index = partition(nums, left, right)
@@ -673,9 +674,36 @@ def topk_split(nums, k, left, right):
         else:
             topk_split(nums, k, left, index - 1)
 
-def topk(nums, k):
+# 第k大
+def k_max(nums, k):
     topk_split(nums, len(nums) - k, 0, len(nums) - 1)
     return nums[len(nums) - k]
+
+# topk
+def topk(nums, k):
+    res = nums[:k]
+    quick_sort(res, 0, len(res) - 1)
+    for i in range(k, len(nums)):
+        if nums[i] > res[0]:
+            for j in range(len(res)):
+                if j == len(res) - 1:
+                    res.append(nums[i])
+                    res.pop(0)
+                elif res[j] < nums[i] <= res[j + 1]:
+                    res.insert(j + 1, nums[i])
+                    res.pop(0)
+                    break
+    return res[::-1]
+
+# 最大值
+def max_nums(nums):
+    if not nums:
+        return -1
+    m = nums[0]
+    for i in nums:
+        if i > m:
+            m = i
+    return m
 ```
 
 #### 221. 最大正方形
