@@ -641,7 +641,6 @@ def partition(nums, left, right):
     nums[i] = key
     return i
 
-
 def quick_sort(nums, left, right):
     if left < right:
         index = partition(nums, left, right)
