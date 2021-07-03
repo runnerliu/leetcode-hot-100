@@ -627,6 +627,42 @@ LeetCode地址: https://leetcode-cn.com/problems/implement-trie-prefix-tree/
 
 LeetCode地址: https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
 
+```
+def partition(nums, left, right):
+    key = nums[left]
+    i, j = left, right
+    while i < j:
+        while i < j and nums[j] >= key:
+            j -= 1
+        nums[i] = nums[j]
+        while i < j and nums[i] < key:
+            i += 1
+        nums[j] = nums[i]
+    nums[i] = key
+    return i
+
+
+def quick_sort(nums, left, right):
+    if left < right:
+        index = partition(nums, left, right)
+        quick_sort(nums, left, index - 1)
+        quick_sort(nums, index + 1, right)
+
+def topk_split(nums, k, left, right):
+    if left < right:
+        index = partition(nums, left, right)
+        if index == k:
+            return
+        elif index < k:
+            topk_split(nums, k, index + 1, right)
+        else:
+            topk_split(nums, k, left, index - 1)
+
+def topk(nums, k):
+    topk_split(nums, len(nums) - k, 0, len(nums) - 1)
+    return nums[len(nums) - k]
+```
+
 #### 221. 最大正方形
 
 LeetCode地址: https://leetcode-cn.com/problems/maximal-square/
