@@ -695,6 +695,25 @@ LeetCode地址: https://leetcode-cn.com/problems/path-sum-iii/
 
 LeetCode地址: https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/
 
+#### 470. 用 Rand7() 实现 Rand10()
+
+LeetCode地址: https://leetcode-cn.com/problems/implement-rand10-using-rand7/
+
+```
+# The rand7() API is already defined for you.
+# def rand7():
+# @return a random integer in the range 1 to 7
+
+class Solution:
+    def rand10(self):
+        """
+        :rtype: int
+        """
+        num = (rand7() - 1) * 7 + rand7()
+        if num > 40: return self.rand10()
+        return num % 10 + 1
+```
+
 #### 494. 目标和
 
 LeetCode地址: https://leetcode-cn.com/problems/target-sum/
