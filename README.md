@@ -540,6 +540,41 @@ class Solution:
         return list(res.values())
 ```
 
+#### 103. 二叉树的锯齿形层序遍历
+
+LeetCode地址: https://leetcode-cn.com/problems/Binary-Tree-Zigzag-Level-Order-Traversal/
+
+```
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        
+        def dfs(head, res, cur):
+            if head:
+                cur += 1
+                if cur not in res:
+                    res[cur] = []
+                dfs(head.left, res, cur)
+                res[cur].append(head.val)
+                dfs(head.right, res, cur)
+            return res
+
+        res = {}
+        dfs(root, res, 0)
+        for k, v in res.items():
+            if k % 2 == 0:
+                res[k] = v[::-1]
+        return list(res.values())
+        
+```
+
 #### 105. 从前序与中序遍历序列构造二叉树
 
 LeetCode地址: https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
