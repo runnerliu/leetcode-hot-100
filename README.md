@@ -219,6 +219,17 @@ class Solution(object):
 
 LeetCode地址: https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/
 
+```
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        minprice = float('inf')
+        lirui = 0
+        for i in prices:
+            minprice = min(i, minprice)
+            lirui = max(lirui, i - minprice)
+        return lirui
+```
+
 #### 136. 只出现一次的数字
 
 LeetCode地址: https://leetcode-cn.com/problems/single-number/
@@ -275,6 +286,22 @@ LeetCode地址: https://leetcode-cn.com/problems/min-stack/
 #### 160. 相交链表
 
 LeetCode地址: https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
+
+```
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        A, B = headA, headB
+        while A != B:
+            A = A.next if A else headB
+            B = B.next if B else headA
+        return A
+```
 
 #### 169. 多数元素
 
@@ -395,9 +422,50 @@ LeetCode地址: https://leetcode-cn.com/problems/hamming-distance/
 
 LeetCode地址: https://leetcode-cn.com/problems/diameter-of-binary-tree/
 
+```
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        self.ans = 1
+
+        def dfs(head):
+            if not head: return 0
+            l = dfs(head.left)
+            r = dfs(head.right)
+            self.ans = max(self.ans, l + r + 1)
+            return max(l, r) + 1
+
+        dfs(root)
+        return self.ans - 1
+```
+
 #### 617. 合并二叉树
 
 LeetCode地址: https://leetcode-cn.com/problems/merge-two-binary-trees/
+
+```
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def mergeTrees(self, root1: TreeNode, root2: TreeNode) -> TreeNode:
+        if not root1:
+            return root2
+        if not root2:
+            return root1
+        newTree = TreeNode(root1.val + root2.val)
+        newTree.left = self.mergeTrees(root1.left, root2.left)
+        newTree.right = self.mergeTrees(root1.right, root2.right)
+        return newTree
+```
 
 ### 中等
 
