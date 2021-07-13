@@ -591,6 +591,32 @@ LeetCode地址: https://leetcode-cn.com/problems/longest-substring-without-repea
 
 LeetCode地址: https://leetcode-cn.com/problems/longest-palindromic-substring/
 
+```
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        size = len(s)
+        if size == 1:
+            return s
+        dp = [[False] * size for _ in range(size)]
+        max_len, start = 1, 0
+        for j in range(1, size):
+            for i in range(j):
+                if j - i <= 2:
+                    if s[i] == s[j]:
+                        dp[i][j] = True
+                        cur_len = j - i + 1
+                else:
+                    if s[i] == s[j] and dp[i + 1][j - 1]:
+                        dp[i][j] = True
+                        cur_len = j - i + 1
+                
+                if dp[i][j]:
+                    if cur_len > max_len:
+                        max_len = cur_len
+                        start = i
+        return s[start:start + max_len]
+```
+
 #### 11. 盛最多水的容器
 
 LeetCode地址: https://leetcode-cn.com/problems/container-with-most-water/
@@ -969,6 +995,28 @@ LeetCode地址: https://leetcode-cn.com/problems/task-scheduler/
 #### 647. 回文子串
 
 LeetCode地址: https://leetcode-cn.com/problems/palindromic-substrings/
+
+```
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        ans = 0
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+        ans = 0
+        for k in range(n):
+            for i in range(n - k):
+                j = i + k
+                if k == 0: 
+                    dp[i][j] = True
+                elif k == 1:
+                    dp[i][j] = s[i] == s[j]
+                else:
+                    dp[i][j] = dp[i + 1][j - 1] and s[i] == s[j]
+                
+                if dp[i][j]: 
+                    ans+=1
+        return ans
+```
 
 #### 739. 每日温度
 
