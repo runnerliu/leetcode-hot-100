@@ -283,6 +283,34 @@ class Solution:
 
 LeetCode地址: https://leetcode-cn.com/problems/min-stack/
 
+```
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+
+    def push(self, val: int) -> None:
+        """
+        进栈时同时保存当前栈的最小值
+        """
+        if not self.stack:
+            self.stack.append((val, val))
+        else:
+            self.stack.append((val, min(val, self.stack[-1][1])))
+
+    def pop(self) -> None:
+        self.stack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1][0]
+
+    def getMin(self) -> int:
+        return self.stack[-1][1]
+```
+
 #### 160. 相交链表
 
 LeetCode地址: https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
@@ -362,9 +390,45 @@ class Solution(object):
 
 LeetCode地址: https://leetcode-cn.com/problems/invert-binary-tree/
 
+```
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if not root:
+            return root
+        root.left, root.right = root.right, root.left
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        return root
+```
+
 #### 234. 回文链表
 
 LeetCode地址: https://leetcode-cn.com/problems/palindrome-linked-list/
+
+```
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        if not head:
+            return False
+        if not head.next:
+            return True
+        tmp = []
+        while head:
+            tmp.append(head.val)
+            head = head.next
+        return tmp == tmp[::-1]
+```
 
 #### 283. 移动零
 
@@ -414,9 +478,28 @@ class Solution(object):
 
 LeetCode地址: https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/
 
+```
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        if not nums:
+            return []
+        return list(set(range(1, len(nums) + 1)).difference(set(nums)))
+```
+
 #### 461. 汉明距离
 
 LeetCode地址: https://leetcode-cn.com/problems/hamming-distance/
+
+```
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        n = x ^ y
+        c = 0
+        while n:
+            if n & 1: c += 1
+            n >>= 1
+        return c
+```
 
 #### 543. 二叉树的直径
 
