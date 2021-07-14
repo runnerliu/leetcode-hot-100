@@ -587,6 +587,22 @@ class Solution(object):
 
 LeetCode地址: https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
 
+```
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if not s:
+            return 0
+        start = max_len = 0
+        chars = {}
+        for index, i in enumerate(s):
+            if i in chars and start <= chars[i]:
+                start = chars[i] + 1
+            else:
+                max_len = max(max_len, index - start + 1)
+            chars[i] = index
+        return max_len
+```
+
 #### 5. 最长回文子串
 
 LeetCode地址: https://leetcode-cn.com/problems/longest-palindromic-substring/
@@ -621,17 +637,107 @@ class Solution:
 
 LeetCode地址: https://leetcode-cn.com/problems/container-with-most-water/
 
+```
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        if not height:
+            return 0
+        i, j = 0, len(height) - 1
+        res = 0
+        while i < j:
+            if height[i] >= height[j]:
+                h, w = height[j], j - i
+                j -= 1
+            else:
+                h, w = height[i], j - i
+                i += 1
+            res = max(res, h * w)
+        return res
+```
+
 #### 15. 三数之和
 
 LeetCode地址: https://leetcode-cn.com/problems/3sum/
+
+```
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        l = len(nums)
+        if l <= 2:
+            return []
+        nums.sort()
+        res, k = [], 0
+        for k in range(len(nums) - 2):
+            if nums[k] > 0:
+                break
+            if k > 0 and nums[k] == nums[k - 1]:
+                continue
+            i, j = k + 1, len(nums) - 1
+            while i < j:
+                s = nums[k] + nums[i] + nums[j]
+                if s < 0:
+                    i += 1
+                    while i < j and nums[i] == nums[i - 1]:
+                        i += 1
+                elif s > 0:
+                    j -= 1
+                    while i < j and nums[j] == nums[j + 1]:
+                        j -= 1
+                else:
+                    res.append([nums[k], nums[i], nums[j]])
+                    i += 1
+                    j -= 1
+                    while i < j and nums[i] == nums[i - 1]:
+                        i += 1
+                    while i < j and nums[j] == nums[j + 1]:
+                        j -= 1
+        return res
+```
 
 #### 17. 电话号码的字母组合
 
 LeetCode地址: https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
 
+```
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        chars = {'2':'abc', '3':'def', '4':'ghi', '5':'jkl', '6':'mno', '7':'pqrs', '8':'tuv', '9':'wxyz'}
+        product = ['']
+        for i in digits:
+            product = [m + n for m in product for n in chars[i]]
+        return product
+```
+
 #### 19. 删除链表的倒数第 N 个结点
 
 LeetCode地址: https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
+
+```
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        if not head:
+            return None
+        left = right = head
+        count = 0
+        while count < n:
+            right = right.next
+            count += 1
+        if not right:
+            return head.next
+        while right.next:
+            left = left.next
+            right = right.next
+        if left.next:
+            left.next = left.next.next
+        return head
+```
 
 #### 22. 括号生成
 
