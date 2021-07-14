@@ -1049,6 +1049,37 @@ LeetCode地址: https://leetcode-cn.com/problems/queue-reconstruction-by-height/
 
 LeetCode地址: https://leetcode-cn.com/problems/partition-equal-subset-sum/
 
+#### 429. N 叉树的层序遍历
+
+LeetCode地址: https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
+
+```
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        res = []
+        if not root:
+            return res
+        q = [root]
+        while q:
+            l = len(q)
+            sub = []
+            for i in range(l):
+                node = q.pop(0)
+                sub.append(node.val)
+                if node.children:
+                    q.extend(node.children)
+            res.append(sub)
+        return res
+```
+
 #### 437. 路径总和 III
 
 LeetCode地址: https://leetcode-cn.com/problems/path-sum-iii/
