@@ -527,6 +527,85 @@ class Solution:
         return self.ans - 1
 ```
 
+#### 559. N 叉树的最大深度
+
+LeetCode地址: https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/
+
+```
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def maxDepth(self, root: 'Node') -> int:
+        if not root:
+            return 0
+        d = 1
+        for i in root.children:
+            d = max(d, self.maxDepth(i) + 1)
+        return d
+```
+
+#### 589. N 叉树的前序遍历
+
+LeetCode地址: https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/
+
+```
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        if not root:
+            return []
+        res = []
+        
+        def dfs(head):
+            res.append(head.val)
+            for c in head.children:
+                dfs(c)
+
+        dfs(root)
+        return res
+```
+
+#### 590. N 叉树的后序遍历
+
+LeetCode地址: https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/
+
+```
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def postorder(self, root: 'Node') -> List[int]:
+        if not root:
+            return []
+        res = []
+
+        def dfs(head):
+            for c in head.children:
+                dfs(c)
+            res.append(head.val)
+        
+        dfs(root)
+        return res
+```
+
 #### 617. 合并二叉树
 
 LeetCode地址: https://leetcode-cn.com/problems/merge-two-binary-trees/
