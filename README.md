@@ -822,21 +822,114 @@ class Solution:
 
 LeetCode地址: https://leetcode-cn.com/problems/generate-parentheses/
 
+```
+class Solution:
+    def generateParenthesis(self, n: int):
+        dp = [[] for _ in range(n+1)]
+        dp[0] = [""]
+        for i in range(1, n + 1):
+            for p in range(i):
+                for k1 in dp[p]:
+                    for k2 in dp[i - 1 - p]:
+                        dp[i].append("({0}){1}".format(k1, k2))
+        return dp[n]
+```
+
 #### 31. 下一个排列
 
 LeetCode地址: https://leetcode-cn.com/problems/next-permutation/
+
+```
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        for i in range(len(nums)-1, 0, -1):
+            if nums[i-1] < nums[i]:
+                for j in range(len(nums)-1, i-1, -1):
+                    if nums[j] > nums[i-1]:
+                        nums[i-1], nums[j] = nums[j], nums[i-1]
+                        break
+                for j in range((len(nums)-i+1)//2):
+                    nums[i+j], nums[len(nums)-1-j] = nums[len(nums)-1-j], nums[i+j]
+                return nums
+        nums.reverse()
+        return nums
+```
 
 #### 33. 搜索旋转排序数组
 
 LeetCode地址: https://leetcode-cn.com/problems/search-in-rotated-sorted-array/
 
+```
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        if not nums:
+            return -1
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target:
+                return mid
+            if nums[0] <= nums[mid]:
+                if nums[0] <= target < nums[mid]:
+                    r = mid - 1
+                else:
+                    l = mid + 1
+            if nums[0] > nums[mid]:
+                if nums[mid] < target <= nums[len(nums) - 1]:
+                    l = mid + 1
+                else:
+                    r = mid - 1
+        return -1
+```
+
 #### 34. 在排序数组中查找元素的第一个和最后一个位置
 
 LeetCode地址: https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 
+```
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        l = len(nums)
+        if not l:
+            return [-1, -1]
+        if l == 1 and target == nums[0]:
+            return [0, 0]
+        left = right = -1
+        for i in range(l):
+            if nums[i] != target:
+                continue
+            if left == -1:
+                left = i
+                continue
+            if right == -1 or right < i:
+                right = i
+        if left != -1 and right == -1:
+            right = left
+        return [left, right]
+```
+
 #### 39. 组合总和
 
 LeetCode地址: https://leetcode-cn.com/problems/combination-sum/
+
+```
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        if not candidates:
+            return res
+        
+        def combination(candidates,target,res_list):
+            if target < 0:
+                return
+            if target == 0:
+                res.append(res_list)
+            for i,c in enumerate(candidates):
+                combination(candidates[i:],target-c,res_list+[c])
+        combination(candidates,target,[])
+        
+        return res
+```
 
 #### 46. 全排列
 
