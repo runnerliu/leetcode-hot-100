@@ -1238,6 +1238,45 @@ class Solution:
 
 LeetCode地址: https://leetcode-cn.com/problems/daily-temperatures/
 
+#### 1143. 最长公共子序列
+
+LeetCode地址: https://leetcode-cn.com/problems/longest-common-subsequence/
+
+```
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        if not text1 or not text2:
+            return 0
+        m, n = len(text1), len(text2)
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if text1[i - 1] == text2[j - 1]:
+                    dp[i][j] = dp[i - 1][j - 1] + 1
+                else:
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+        return dp[m][n]
+```
+
+最长公共子串
+
+```
+def longestCommonSubsequence(text1, text2) -> (str, int):
+    if not text1 or not text2:
+        return None, 0
+    m, n = len(text1), len(text2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    end = max_len = 0
+    for i in range(len(text1)):
+        for j in range(len(text2)):
+            if text1[i] == text2[j]:
+                dp[i + 1][j + 1] = dp[i][j] + 1
+                if dp[i + 1][j + 1] > max_len:
+                    max_len = dp[i + 1][j + 1]
+                    end = i + 1
+    return text1[end - max_len:end], max_len
+```
+
 #### 1254. 统计封闭岛屿的数目
 
 LeetCode地址: https://leetcode-cn.com/problems/number-of-closed-islands/
@@ -1350,3 +1389,82 @@ LeetCode地址: https://leetcode-cn.com/problems/remove-invalid-parentheses/
 #### 312. 戳气球
 
 LeetCode地址: https://leetcode-cn.com/problems/burst-balloons/
+
+
+### 其他
+
+1. str_1 = "helloworld"，str_2 = "oworldhell"，func(str_1, str_2)  ->  true / false
+
+```
+def reverse(str1, str2) -> bool:
+    if not str2 or not str2:
+        return False
+    key = str2[0]
+    l1 = len(str1)
+    l2 = len(str2)
+    for i in range(l1):
+        if str1[i] == key:
+            if str1[i:] == str2[:(l1 - i)] and str1[:i] == str2[(l1 - i):]:
+                return True
+    return False
+```
+
+2. 实现LRU算法
+
+```
+class LRUCache(object):
+
+    def __init__(self, cap):
+        self.cap = cap
+        self.cache = {}
+        self.keys = []
+
+    def get(self, key):
+        if key in self.cache:
+            value = self.cache[key]
+            self.keys.remove(key)
+            self.keys.insert(0, key)
+        else:
+            value = -1
+        return value
+
+    def put(self, key, value):
+        if key in self.cache:
+            self.keys.remove(key)
+        elif len(self.keys) == self.cap:
+            old_key = self.keys.pop()
+            del self.cache[old_key]
+        self.keys.insert(0, key)
+        self.cache[key] = value
+```
+
+3. 合并N个有序数组
+
+```
+import heapq
+from collections import deque
+
+def list_merge(*lists):
+    #入参判断, 这里直接pass
+    #将所有链表转化为deque,方便使用popleft获取链表的最左元素及根据索引返回该索引对应的剩余链表
+    queues = [queue for queue in map(deque, lists)]
+    heap = []
+    #初始化链表,该链表中的元素为元组, 各个链表的第一个元素及链表所在索引
+    for i, lst in enumerate(queues):
+        heap.append((lst.popleft(), i))
+    #将链表转换成最小堆
+    heapq.heapify(heap)
+    #链表: 用于存放每次获取的堆顶层元素
+    result = []
+    
+    while heap:
+        #将堆顶层元素出堆
+        value, index = heapq.heappop(heap)
+        #将顶层元素追加
+        result.append(value)
+        #根据索引获取对应链表的剩余元素
+        if queues[index]:
+             #如果存在下一个元素,则将该元素及索引入堆
+            heapq.heappush(heap, (queues[index].popleft(), index))
+    return result
+```
