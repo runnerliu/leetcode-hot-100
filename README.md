@@ -990,6 +990,39 @@ class Solution:
         return [v for v in r.values()]
 ```
 
+#### 50. Pow(x, n)
+
+LeetCode地址: https://leetcode-cn.com/problems/powx-n/
+
+```
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if x == 0.0: return 0.0
+        res = 1
+        if n < 0: x, n = 1 / x, -n
+        while n:
+            if n & 1: res *= x
+            x *= x
+            n >>= 1
+        return res
+
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n >= 0:
+            return self.quick_pow(x, n)
+        else:
+            return 1.0 / self.quick_pow(x, -n)
+
+    def quick_pow(self, a: float, n: int) -> float:
+        res = 1.0
+        while n > 0:
+            if n & 1 == 1:
+                res *= a
+            a *= a
+            n //= 2
+        return res
+```
+
 #### 55. 跳跃游戏
 
 LeetCode地址: https://leetcode-cn.com/problems/jump-game/
