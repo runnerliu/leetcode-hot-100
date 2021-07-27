@@ -1142,6 +1142,91 @@ LeetCode地址: https://leetcode-cn.com/problems/linked-list-cycle-ii/
 
 LeetCode地址: https://leetcode-cn.com/problems/lru-cache/
 
+```
+class LRUCache(object):
+
+    def __init__(self, cap):
+        self.cap = cap
+        self.cache = {}
+        self.keys = []
+
+    def get(self, key):
+        if key in self.cache:
+            value = self.cache[key]
+            self.keys.remove(key)
+            self.keys.insert(0, key)
+        else:
+            value = -1
+        return value
+
+    def put(self, key, value):
+        if key in self.cache:
+            self.keys.remove(key)
+        elif len(self.keys) == self.cap:
+            old_key = self.keys.pop()
+            del self.cache[old_key]
+        self.keys.insert(0, key)
+        self.cache[key] = value
+
+
+class LinkedNode:
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.prev = None
+        self.next = None
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.cache = {}
+        self.head = LinkedNode(0, 0)
+        self.tail = LinkedNode(0, 0)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+        self.capacity = capacity
+        self.size = 0
+
+    def get(self, key: int) -> int:
+        if key not in self.cache: return -1
+        node = self.cache[key]
+        self.move_to_head(node)
+        return node.val
+
+    def put(self, key: int, value: int) -> None:
+        if key not in self.cache:
+            node = LinkedNode(key, value)
+            self.cache[key] = node
+            self.add_head(node)
+            self.size += 1
+            if self.size > self.capacity:
+                cur = self.remove_tail()
+                self.cache.pop(cur.key)
+                self.size -= 1
+        else:
+            node = self.cache[key]
+            node.val = value
+            self.move_to_head(node)
+
+    def add_head(self, node):
+        node.prev = self.head
+        node.next = self.head.next
+        self.head.next.prev = node
+        self.head.next = node
+    
+    def remove(self, node):
+        node.prev.next = node.next
+        node.next.prev = node.prev
+    
+    def move_to_head(self, node):
+        self.remove(node)
+        self.add_head(node)
+    
+    def remove_tail(self):
+        node = self.tail.prev
+        self.remove(node)
+        return node
+```
+
 #### 148. 排序链表
 
 LeetCode地址: https://leetcode-cn.com/problems/sort-list/
@@ -1574,36 +1659,7 @@ def reverse(str1, str2) -> bool:
     return False
 ```
 
-2. 实现LRU算法
-
-```
-class LRUCache(object):
-
-    def __init__(self, cap):
-        self.cap = cap
-        self.cache = {}
-        self.keys = []
-
-    def get(self, key):
-        if key in self.cache:
-            value = self.cache[key]
-            self.keys.remove(key)
-            self.keys.insert(0, key)
-        else:
-            value = -1
-        return value
-
-    def put(self, key, value):
-        if key in self.cache:
-            self.keys.remove(key)
-        elif len(self.keys) == self.cap:
-            old_key = self.keys.pop()
-            del self.cache[old_key]
-        self.keys.insert(0, key)
-        self.cache[key] = value
-```
-
-3. 合并N个有序数组
+2. 合并N个有序数组
 
 ```
 import heapq
@@ -1632,4 +1688,59 @@ def list_merge(*lists):
              #如果存在下一个元素,则将该元素及索引入堆
             heapq.heappush(heap, (queues[index].popleft(), index))
     return result
+```
+
+3. json字符串解析
+
+```
+{
+    "@id": "xxx", 
+    "@type": ["Person"], 
+    "name": "刘德华", 
+    "works": [
+        {
+            "@value": "无间道", 
+            "@id": "xxx"
+        }, 
+        {
+            "@value": "无间道2", 
+            "@id": "xxx"
+        }
+    ], 
+    "award": {
+        "awardCeremony": "xxx颁奖典礼", 
+        "awardName": "最佳演员"
+    }
+}
+
+输出：
+@id, xxx
+@type, Person
+name, 刘德华
+works.@value, 无间道
+works.@id, xxx
+works.@value, 无间道2
+works.@id, xxx
+award.awardCeremony, xxx颁奖典礼
+award.awardName, 最佳演员
+
+def print_json(data, parent=None):
+    if isinstance(data, dict):
+        for k in data.keys():
+            v = data[k]
+            if isinstance(v, dict):
+                print_json(v, k)
+            elif isinstance(v, list):
+                for v_data in v:
+                    print_json(v_data, k)
+            else:
+                if not parent:
+                    print('{}, {}'.format(k, v))
+                else:
+                    print('{}.{}, {}'.format(parent, k, v))
+    elif isinstance(data, list):
+        for i in data:
+            print_json(i)
+    elif isinstance(data, str):
+        print('{}, {}'.format(parent, data))
 ```
