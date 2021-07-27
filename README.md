@@ -935,21 +935,93 @@ class Solution:
 
 LeetCode地址: https://leetcode-cn.com/problems/permutations/
 
+```
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        def backtrack(nums, tmp):
+            if not nums:
+                res.append(tmp)
+                return 
+            for i in range(len(nums)):
+                backtrack(nums[:i] + nums[i+1:], tmp + [nums[i]])
+        backtrack(nums, [])
+        return res
+```
+
 #### 48. 旋转图像
 
 LeetCode地址: https://leetcode-cn.com/problems/rotate-image/
+
+```
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        pos1, pos2 = 0, len(matrix) - 1
+        while pos1 < pos2:
+            add = 0
+            while add < (pos2 - pos1):
+                temp = matrix[pos2-add][pos1]
+                matrix[pos2-add][pos1] = matrix[pos2][pos2-add]
+                matrix[pos2][pos2-add] = matrix[pos1+add][pos2]
+                matrix[pos1+add][pos2] = matrix[pos1][pos1+add]
+                matrix[pos1][pos1+add] = temp
+                add += 1
+            pos1 += 1
+            pos2 -= 1
+```
 
 #### 49. 字母异位词分组
 
 LeetCode地址: https://leetcode-cn.com/problems/group-anagrams/
 
+```
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        r = {}
+        for i in strs:
+            s = ''.join(sorted(i))
+            if s not in r:
+                r[s] = [i]
+            else:
+                r[s].append(i)
+        return [v for v in r.values()]
+```
+
 #### 55. 跳跃游戏
 
 LeetCode地址: https://leetcode-cn.com/problems/jump-game/
 
+```
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        max_i = 0
+        for i, jump in enumerate(nums):
+            if max_i >= i and i + jump > max_i:  
+                max_i = i + jump
+        return max_i >= i
+```
+
 #### 56. 合并区间
 
 LeetCode地址: https://leetcode-cn.com/problems/merge-intervals/
+
+```
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        if not intervals:
+            return []
+        intervals.sort()
+        res = [intervals[0]]
+        for x, y in intervals[1:]:
+            if res[-1][1] < x:
+                res.append([x, y])
+            else:
+                res[-1][1] = max(y, res[-1][1])
+        return res
+```
 
 #### 62. 不同路径
 
