@@ -21,6 +21,27 @@ class Solution:
         return []
 ```
 
+7. 整数反转
+
+LeetCode地址：https://leetcode-cn.com/problems/reverse-integer/
+
+```
+class Solution:
+    def reverse(self, x: int) -> int:
+        if x > -10 and x < 10:
+            return x
+
+        x_s = str(x)
+        if x_s[0] == '-':
+            x_s = x_s[:0:-1]
+            x_s = int(x_s)
+            x_s = -x_s
+        else:
+            x_s = x_s[::-1]
+            x_s = int(x_s)
+        return x_s if x_s >= -2**31 and x_s <= (2**31 - 1) else 0
+```
+
 #### 20. 有效的括号
 
 LeetCode地址: https://leetcode-cn.com/problems/valid-parentheses/
@@ -890,6 +911,39 @@ LeetCode地址: https://leetcode-cn.com/problems/palindromic-substrings/
 #### 739. 每日温度
 
 LeetCode地址: https://leetcode-cn.com/problems/daily-temperatures/
+
+#### 1143. 最长公共子序列
+
+LeetCode地址: https://leetcode-cn.com/problems/longest-common-subsequence/
+
+```
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        if not text1 or not text2:
+            return 0
+        m, n = len(text1), len(text2)
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if text1[i - 1] == text2[j - 1]:
+                    dp[i][j] = dp[i - 1][j - 1] + 1
+                else:
+                    dp[i][j] = max(dp[i][j - 1], dp[i - 1][j])
+        return dp[m][n]
+
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        
+        @lru_cache(None)
+        def dfs(i, j):
+            if not i or not j:
+                return 0
+            if text1[i - 1] == text2[j - 1]:
+                return dfs(i - 1, j - 1) + 1
+            return max(dfs(i - 1, j), dfs(i, j - 1))
+
+        return dfs(len(text1), len(text2))
+```
 
 #### 1254. 统计封闭岛屿的数目
 
