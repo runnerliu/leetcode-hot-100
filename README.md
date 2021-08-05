@@ -304,6 +304,34 @@ class Solution:
 
 LeetCode地址: https://leetcode-cn.com/problems/min-stack/
 
+```
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+
+    def push(self, val: int) -> None:
+        """
+        进栈时同时保存当前栈的最小值
+        """
+        if not self.stack:
+            self.stack.append((val, val))
+        else:
+            self.stack.append((val, min(val, self.stack[-1][1])))
+
+    def pop(self) -> None:
+        self.stack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1][0]
+
+    def getMin(self) -> int:
+        return self.stack[-1][1]
+```
+
 #### 160. 相交链表
 
 LeetCode地址: https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
@@ -383,9 +411,45 @@ class Solution(object):
 
 LeetCode地址: https://leetcode-cn.com/problems/invert-binary-tree/
 
+```
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if not root:
+            return root
+        root.left, root.right = root.right, root.left
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        return root
+```
+
 #### 234. 回文链表
 
 LeetCode地址: https://leetcode-cn.com/problems/palindrome-linked-list/
+
+```
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        if not head:
+            return False
+        if not head.next:
+            return True
+        tmp = []
+        while head:
+            tmp.append(head.val)
+            head = head.next
+        return tmp == tmp[::-1]
+```
 
 #### 283. 移动零
 
@@ -435,9 +499,28 @@ class Solution(object):
 
 LeetCode地址: https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/
 
+```
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        if not nums:
+            return []
+        return list(set(range(1, len(nums) + 1)).difference(set(nums)))
+```
+
 #### 461. 汉明距离
 
 LeetCode地址: https://leetcode-cn.com/problems/hamming-distance/
+
+```
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        n = x ^ y
+        c = 0
+        while n:
+            if n & 1: c += 1
+            n >>= 1
+        return c
+```
 
 #### 543. 二叉树的直径
 
@@ -463,6 +546,85 @@ class Solution:
 
         dfs(root)
         return self.ans - 1
+```
+
+#### 559. N 叉树的最大深度
+
+LeetCode地址: https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/
+
+```
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def maxDepth(self, root: 'Node') -> int:
+        if not root:
+            return 0
+        d = 1
+        for i in root.children:
+            d = max(d, self.maxDepth(i) + 1)
+        return d
+```
+
+#### 589. N 叉树的前序遍历
+
+LeetCode地址: https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/
+
+```
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        if not root:
+            return []
+        res = []
+        
+        def dfs(head):
+            res.append(head.val)
+            for c in head.children:
+                dfs(c)
+
+        dfs(root)
+        return res
+```
+
+#### 590. N 叉树的后序遍历
+
+LeetCode地址: https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/
+
+```
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def postorder(self, root: 'Node') -> List[int]:
+        if not root:
+            return []
+        res = []
+
+        def dfs(head):
+            for c in head.children:
+                dfs(c)
+            res.append(head.val)
+        
+        dfs(root)
+        return res
 ```
 
 #### 617. 合并二叉树
@@ -525,65 +687,395 @@ class Solution(object):
 
 LeetCode地址: https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
 
+```
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if not s:
+            return 0
+        start = max_len = 0
+        chars = {}
+        for index, i in enumerate(s):
+            if i in chars and start <= chars[i]:
+                start = chars[i] + 1
+            else:
+                max_len = max(max_len, index - start + 1)
+            chars[i] = index
+        return max_len
+```
+
 #### 5. 最长回文子串
 
 LeetCode地址: https://leetcode-cn.com/problems/longest-palindromic-substring/
+
+```
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        size = len(s)
+        if size == 1:
+            return s
+        dp = [[False] * size for _ in range(size)]
+        max_len, start = 1, 0
+        for j in range(1, size):
+            for i in range(j):
+                if j - i <= 2:
+                    if s[i] == s[j]:
+                        dp[i][j] = True
+                        cur_len = j - i + 1
+                else:
+                    if s[i] == s[j] and dp[i + 1][j - 1]:
+                        dp[i][j] = True
+                        cur_len = j - i + 1
+                
+                if dp[i][j]:
+                    if cur_len > max_len:
+                        max_len = cur_len
+                        start = i
+        return s[start:start + max_len]
+```
 
 #### 11. 盛最多水的容器
 
 LeetCode地址: https://leetcode-cn.com/problems/container-with-most-water/
 
+```
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        if not height:
+            return 0
+        i, j = 0, len(height) - 1
+        res = 0
+        while i < j:
+            if height[i] >= height[j]:
+                h, w = height[j], j - i
+                j -= 1
+            else:
+                h, w = height[i], j - i
+                i += 1
+            res = max(res, h * w)
+        return res
+```
+
 #### 15. 三数之和
 
 LeetCode地址: https://leetcode-cn.com/problems/3sum/
+
+```
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        l = len(nums)
+        if l <= 2:
+            return []
+        nums.sort()
+        res, k = [], 0
+        for k in range(len(nums) - 2):
+            if nums[k] > 0:
+                break
+            if k > 0 and nums[k] == nums[k - 1]:
+                continue
+            i, j = k + 1, len(nums) - 1
+            while i < j:
+                s = nums[k] + nums[i] + nums[j]
+                if s < 0:
+                    i += 1
+                    while i < j and nums[i] == nums[i - 1]:
+                        i += 1
+                elif s > 0:
+                    j -= 1
+                    while i < j and nums[j] == nums[j + 1]:
+                        j -= 1
+                else:
+                    res.append([nums[k], nums[i], nums[j]])
+                    i += 1
+                    j -= 1
+                    while i < j and nums[i] == nums[i - 1]:
+                        i += 1
+                    while i < j and nums[j] == nums[j + 1]:
+                        j -= 1
+        return res
+```
 
 #### 17. 电话号码的字母组合
 
 LeetCode地址: https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
 
+```
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        chars = {'2':'abc', '3':'def', '4':'ghi', '5':'jkl', '6':'mno', '7':'pqrs', '8':'tuv', '9':'wxyz'}
+        product = ['']
+        for i in digits:
+            product = [m + n for m in product for n in chars[i]]
+        return product
+```
+
 #### 19. 删除链表的倒数第 N 个结点
 
 LeetCode地址: https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
+
+```
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        if not head:
+            return None
+        left = right = head
+        count = 0
+        while count < n:
+            right = right.next
+            count += 1
+        if not right:
+            return head.next
+        while right.next:
+            left = left.next
+            right = right.next
+        if left.next:
+            left.next = left.next.next
+        return head
+```
 
 #### 22. 括号生成
 
 LeetCode地址: https://leetcode-cn.com/problems/generate-parentheses/
 
+```
+class Solution:
+    def generateParenthesis(self, n: int):
+        dp = [[] for _ in range(n+1)]
+        dp[0] = [""]
+        for i in range(1, n + 1):
+            for p in range(i):
+                for k1 in dp[p]:
+                    for k2 in dp[i - 1 - p]:
+                        dp[i].append("({0}){1}".format(k1, k2))
+        return dp[n]
+```
+
 #### 31. 下一个排列
 
 LeetCode地址: https://leetcode-cn.com/problems/next-permutation/
+
+```
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        for i in range(len(nums)-1, 0, -1):
+            if nums[i-1] < nums[i]:
+                for j in range(len(nums)-1, i-1, -1):
+                    if nums[j] > nums[i-1]:
+                        nums[i-1], nums[j] = nums[j], nums[i-1]
+                        break
+                for j in range((len(nums)-i+1)//2):
+                    nums[i+j], nums[len(nums)-1-j] = nums[len(nums)-1-j], nums[i+j]
+                return nums
+        nums.reverse()
+        return nums
+```
 
 #### 33. 搜索旋转排序数组
 
 LeetCode地址: https://leetcode-cn.com/problems/search-in-rotated-sorted-array/
 
+```
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        if not nums:
+            return -1
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target:
+                return mid
+            if nums[0] <= nums[mid]:
+                if nums[0] <= target < nums[mid]:
+                    r = mid - 1
+                else:
+                    l = mid + 1
+            if nums[0] > nums[mid]:
+                if nums[mid] < target <= nums[len(nums) - 1]:
+                    l = mid + 1
+                else:
+                    r = mid - 1
+        return -1
+```
+
 #### 34. 在排序数组中查找元素的第一个和最后一个位置
 
 LeetCode地址: https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+
+```
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        l = len(nums)
+        if not l:
+            return [-1, -1]
+        if l == 1 and target == nums[0]:
+            return [0, 0]
+        left = right = -1
+        for i in range(l):
+            if nums[i] != target:
+                continue
+            if left == -1:
+                left = i
+                continue
+            if right == -1 or right < i:
+                right = i
+        if left != -1 and right == -1:
+            right = left
+        return [left, right]
+```
 
 #### 39. 组合总和
 
 LeetCode地址: https://leetcode-cn.com/problems/combination-sum/
 
+```
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        if not candidates:
+            return res
+        
+        def combination(candidates,target,res_list):
+            if target < 0:
+                return
+            if target == 0:
+                res.append(res_list)
+            for i,c in enumerate(candidates):
+                combination(candidates[i:],target-c,res_list+[c])
+        combination(candidates,target,[])
+        
+        return res
+```
+
 #### 46. 全排列
 
 LeetCode地址: https://leetcode-cn.com/problems/permutations/
+
+```
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        def backtrack(nums, tmp):
+            if not nums:
+                res.append(tmp)
+                return 
+            for i in range(len(nums)):
+                backtrack(nums[:i] + nums[i+1:], tmp + [nums[i]])
+        backtrack(nums, [])
+        return res
+```
 
 #### 48. 旋转图像
 
 LeetCode地址: https://leetcode-cn.com/problems/rotate-image/
 
+```
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        pos1, pos2 = 0, len(matrix) - 1
+        while pos1 < pos2:
+            add = 0
+            while add < (pos2 - pos1):
+                temp = matrix[pos2-add][pos1]
+                matrix[pos2-add][pos1] = matrix[pos2][pos2-add]
+                matrix[pos2][pos2-add] = matrix[pos1+add][pos2]
+                matrix[pos1+add][pos2] = matrix[pos1][pos1+add]
+                matrix[pos1][pos1+add] = temp
+                add += 1
+            pos1 += 1
+            pos2 -= 1
+```
+
 #### 49. 字母异位词分组
 
 LeetCode地址: https://leetcode-cn.com/problems/group-anagrams/
+
+```
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        r = {}
+        for i in strs:
+            s = ''.join(sorted(i))
+            if s not in r:
+                r[s] = [i]
+            else:
+                r[s].append(i)
+        return [v for v in r.values()]
+```
+
+#### 50. Pow(x, n)
+
+LeetCode地址: https://leetcode-cn.com/problems/powx-n/
+
+```
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if x == 0.0: return 0.0
+        res = 1
+        if n < 0: x, n = 1 / x, -n
+        while n:
+            if n & 1: res *= x
+            x *= x
+            n >>= 1
+        return res
+
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n >= 0:
+            return self.quick_pow(x, n)
+        else:
+            return 1.0 / self.quick_pow(x, -n)
+
+    def quick_pow(self, a: float, n: int) -> float:
+        res = 1.0
+        while n > 0:
+            if n & 1 == 1:
+                res *= a
+            a *= a
+            n //= 2
+        return res
+```
 
 #### 55. 跳跃游戏
 
 LeetCode地址: https://leetcode-cn.com/problems/jump-game/
 
+```
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        max_i = 0
+        for i, jump in enumerate(nums):
+            if max_i >= i and i + jump > max_i:  
+                max_i = i + jump
+        return max_i >= i
+```
+
 #### 56. 合并区间
 
 LeetCode地址: https://leetcode-cn.com/problems/merge-intervals/
+
+```
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        if not intervals:
+            return []
+        intervals.sort()
+        res = [intervals[0]]
+        for x, y in intervals[1:]:
+            if res[-1][1] < x:
+                res.append([x, y])
+            else:
+                res[-1][1] = max(y, res[-1][1])
+        return res
+```
 
 #### 62. 不同路径
 
@@ -703,6 +1195,91 @@ LeetCode地址: https://leetcode-cn.com/problems/linked-list-cycle-ii/
 #### 146. LRU 缓存机制
 
 LeetCode地址: https://leetcode-cn.com/problems/lru-cache/
+
+```
+class LRUCache(object):
+
+    def __init__(self, cap):
+        self.cap = cap
+        self.cache = {}
+        self.keys = []
+
+    def get(self, key):
+        if key in self.cache:
+            value = self.cache[key]
+            self.keys.remove(key)
+            self.keys.insert(0, key)
+        else:
+            value = -1
+        return value
+
+    def put(self, key, value):
+        if key in self.cache:
+            self.keys.remove(key)
+        elif len(self.keys) == self.cap:
+            old_key = self.keys.pop()
+            del self.cache[old_key]
+        self.keys.insert(0, key)
+        self.cache[key] = value
+
+
+class LinkedNode:
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.prev = None
+        self.next = None
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.cache = {}
+        self.head = LinkedNode(0, 0)
+        self.tail = LinkedNode(0, 0)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+        self.capacity = capacity
+        self.size = 0
+
+    def get(self, key: int) -> int:
+        if key not in self.cache: return -1
+        node = self.cache[key]
+        self.move_to_head(node)
+        return node.val
+
+    def put(self, key: int, value: int) -> None:
+        if key not in self.cache:
+            node = LinkedNode(key, value)
+            self.cache[key] = node
+            self.add_head(node)
+            self.size += 1
+            if self.size > self.capacity:
+                cur = self.remove_tail()
+                self.cache.pop(cur.key)
+                self.size -= 1
+        else:
+            node = self.cache[key]
+            node.val = value
+            self.move_to_head(node)
+
+    def add_head(self, node):
+        node.prev = self.head
+        node.next = self.head.next
+        self.head.next.prev = node
+        self.head.next = node
+    
+    def remove(self, node):
+        node.prev.next = node.next
+        node.next.prev = node.prev
+    
+    def move_to_head(self, node):
+        self.remove(node)
+        self.add_head(node)
+    
+    def remove_tail(self):
+        node = self.tail.prev
+        self.remove(node)
+        return node
+```
 
 #### 148. 排序链表
 
@@ -855,6 +1432,37 @@ LeetCode地址: https://leetcode-cn.com/problems/queue-reconstruction-by-height/
 
 LeetCode地址: https://leetcode-cn.com/problems/partition-equal-subset-sum/
 
+#### 429. N 叉树的层序遍历
+
+LeetCode地址: https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
+
+```
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        res = []
+        if not root:
+            return res
+        q = [root]
+        while q:
+            l = len(q)
+            sub = []
+            for i in range(l):
+                node = q.pop(0)
+                sub.append(node.val)
+                if node.children:
+                    q.extend(node.children)
+            res.append(sub)
+        return res
+```
+
 #### 437. 路径总和 III
 
 LeetCode地址: https://leetcode-cn.com/problems/path-sum-iii/
@@ -908,6 +1516,28 @@ LeetCode地址: https://leetcode-cn.com/problems/task-scheduler/
 
 LeetCode地址: https://leetcode-cn.com/problems/palindromic-substrings/
 
+```
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        ans = 0
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+        ans = 0
+        for k in range(n):
+            for i in range(n - k):
+                j = i + k
+                if k == 0: 
+                    dp[i][j] = True
+                elif k == 1:
+                    dp[i][j] = s[i] == s[j]
+                else:
+                    dp[i][j] = dp[i + 1][j - 1] and s[i] == s[j]
+                
+                if dp[i][j]: 
+                    ans+=1
+        return ans
+```
+
 #### 739. 每日温度
 
 LeetCode地址: https://leetcode-cn.com/problems/daily-temperatures/
@@ -928,21 +1558,27 @@ class Solution:
                 if text1[i - 1] == text2[j - 1]:
                     dp[i][j] = dp[i - 1][j - 1] + 1
                 else:
-                    dp[i][j] = max(dp[i][j - 1], dp[i - 1][j])
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
         return dp[m][n]
+```
 
-class Solution:
-    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
-        
-        @lru_cache(None)
-        def dfs(i, j):
-            if not i or not j:
-                return 0
-            if text1[i - 1] == text2[j - 1]:
-                return dfs(i - 1, j - 1) + 1
-            return max(dfs(i - 1, j), dfs(i, j - 1))
+最长公共子串
 
-        return dfs(len(text1), len(text2))
+```
+def longestCommonSubsequence(text1, text2) -> (str, int):
+    if not text1 or not text2:
+        return None, 0
+    m, n = len(text1), len(text2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    end = max_len = 0
+    for i in range(len(text1)):
+        for j in range(len(text2)):
+            if text1[i] == text2[j]:
+                dp[i + 1][j + 1] = dp[i][j] + 1
+                if dp[i + 1][j + 1] > max_len:
+                    max_len = dp[i + 1][j + 1]
+                    end = i + 1
+    return text1[end - max_len:end], max_len
 ```
 
 #### 1254. 统计封闭岛屿的数目
@@ -1057,3 +1693,108 @@ LeetCode地址: https://leetcode-cn.com/problems/remove-invalid-parentheses/
 #### 312. 戳气球
 
 LeetCode地址: https://leetcode-cn.com/problems/burst-balloons/
+
+
+### 其他
+
+1. str_1 = "helloworld"，str_2 = "oworldhell"，func(str_1, str_2)  ->  true / false
+
+```
+def reverse(str1, str2) -> bool:
+    if not str2 or not str2:
+        return False
+    key = str2[0]
+    l1 = len(str1)
+    l2 = len(str2)
+    for i in range(l1):
+        if str1[i] == key:
+            if str1[i:] == str2[:(l1 - i)] and str1[:i] == str2[(l1 - i):]:
+                return True
+    return False
+```
+
+2. 合并N个有序数组
+
+```
+import heapq
+from collections import deque
+
+def list_merge(*lists):
+    #入参判断, 这里直接pass
+    #将所有链表转化为deque,方便使用popleft获取链表的最左元素及根据索引返回该索引对应的剩余链表
+    queues = [queue for queue in map(deque, lists)]
+    heap = []
+    #初始化链表,该链表中的元素为元组, 各个链表的第一个元素及链表所在索引
+    for i, lst in enumerate(queues):
+        heap.append((lst.popleft(), i))
+    #将链表转换成最小堆
+    heapq.heapify(heap)
+    #链表: 用于存放每次获取的堆顶层元素
+    result = []
+    
+    while heap:
+        #将堆顶层元素出堆
+        value, index = heapq.heappop(heap)
+        #将顶层元素追加
+        result.append(value)
+        #根据索引获取对应链表的剩余元素
+        if queues[index]:
+             #如果存在下一个元素,则将该元素及索引入堆
+            heapq.heappush(heap, (queues[index].popleft(), index))
+    return result
+```
+
+3. json字符串解析
+
+```
+{
+    "@id": "xxx", 
+    "@type": ["Person"], 
+    "name": "刘德华", 
+    "works": [
+        {
+            "@value": "无间道", 
+            "@id": "xxx"
+        }, 
+        {
+            "@value": "无间道2", 
+            "@id": "xxx"
+        }
+    ], 
+    "award": {
+        "awardCeremony": "xxx颁奖典礼", 
+        "awardName": "最佳演员"
+    }
+}
+
+输出：
+@id, xxx
+@type, Person
+name, 刘德华
+works.@value, 无间道
+works.@id, xxx
+works.@value, 无间道2
+works.@id, xxx
+award.awardCeremony, xxx颁奖典礼
+award.awardName, 最佳演员
+
+def print_json(data, parent=None):
+    if isinstance(data, dict):
+        for k in data.keys():
+            v = data[k]
+            if isinstance(v, dict):
+                print_json(v, k)
+            elif isinstance(v, list):
+                for v_data in v:
+                    print_json(v_data, k)
+            else:
+                if not parent:
+                    print('{}, {}'.format(k, v))
+                else:
+                    print('{}.{}, {}'.format(parent, k, v))
+    elif isinstance(data, list):
+        for i in data:
+            print_json(i)
+    elif isinstance(data, str):
+        print('{}, {}'.format(parent, data))
+```
