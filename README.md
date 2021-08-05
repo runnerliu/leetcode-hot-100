@@ -21,7 +21,7 @@ class Solution:
         return []
 ```
 
-7. 整数反转
+#### 7. 整数反转
 
 LeetCode地址：https://leetcode-cn.com/problems/reverse-integer/
 
