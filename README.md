@@ -1176,6 +1176,37 @@ class Solution:
 
 LeetCode地址: https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 
+#### 113. 路径总和 II
+
+LeetCode地址：https://leetcode-cn.com/problems/path-sum-ii/
+
+```
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pathSum(self, root: TreeNode, targetSum: int) -> List[List[int]]:
+        def DFS(root, targetSum):
+            if not root:
+                return 
+            res.append(root.val)
+            targetSum -= root.val
+            if not root.left and not root.right:
+                if targetSum == 0:
+                    ress.append(res[:])
+            DFS(root.left, targetSum)
+            DFS(root.right, targetSum)
+            res.pop()
+
+        ress = []
+        res = []
+        DFS(root, targetSum)
+        return ress
+```
+
 #### 114. 二叉树展开为链表
 
 LeetCode地址: https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/
